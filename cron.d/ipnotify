@@ -1,0 +1,8 @@
+#The next 2 lines will make a backup copy of the log files at reboot for crash diagnosis
+#uncomment for the files you want saved
+
+# runs at boot, backup the last set of reports generated prior to a reboot
+@reboot root /usr/local/bin/ipnotify
+
+0 * * * * root /usr/local/bin/ipnotify
+
