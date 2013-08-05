@@ -1,3 +1,20 @@
+# -*- coding: utf-8 -*-
+
+# Copyright (C) 2013 Simone Soldateschi
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 '''
 Created on 22 Jul 2013
 
@@ -42,7 +59,19 @@ def check_dir(directory):
             logging.warn("error creating directory '%s'")
             raise exc
     
+def check_env():
+    '''
+    check the environment, to ensure it can run smoothly
+    '''
+    import platform
+    if platform.system() != 'Linux':
+        print 'Unsupported OS. At the moment ipnotify can only run on GNU/Linux.'
+        sys.exit(1)
+
 if __name__ == '__main__':
+    # check environment before running
+    check_env()
+
     # start logging facility
     start_logging()
     
