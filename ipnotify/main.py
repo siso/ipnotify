@@ -15,25 +15,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
-Created on 22 Jul 2013
-
-@author: simone
-'''
-
 import configuration
 import libipnotify
+from utility import *  # @UnusedWildImport
 
 import logging.config
-import os.path
-import sys
 
 def start_logging():
     '''
     Start logging facility
     '''
-    log_config_file_locations = [ '/opt/ipnotify/etc/logging.conf', 
-                                 './conf/logging.conf',
+    log_config_file_locations = [
                                  os.path.expanduser('~/.ipnotify/logging.conf'),
                                  ]
     log_config_file = None
@@ -47,38 +39,20 @@ def start_logging():
         logging.warn(('log configuration file missing. Default locations: %s' %
                       ", ".join(["%s" % f for f in log_config_file_locations])))
     
-def check_dir(directory):
-    '''
-    Check dir, create it if necessary
-    '''
-    if not os.path.isdir(directory):
-        logging.info("ipnotify directory '%s' is missing, creating it" % directory)
-        try:
-            os.mkdir(directory)
-        except OSError as exc:
-            logging.warn("error creating directory '%s'")
-            raise exc
-    
-def check_env():
-    '''
-    check the environment, to ensure it can run smoothly
-    '''
-    import platform
-    if platform.system() != 'Linux':
-        print 'Unsupported OS. At the moment ipnotify can only run on GNU/Linux.'
-        sys.exit(1)
-
-if __name__ == '__main__':
+def main():
     # check environment before running
     check_env()
-
+    
+    # check '~/.ipnotify' and config files  exist
+    if not check_dir_home():
+        print ("This is the first time 'ipnotify' runs, please, configure "
+               "'%s' according to your needs" % CONFIG_FILE)
+        sys.exit(0)
+    
     # start logging facility
     start_logging()
     
     logging.debug("ipnotify: starting...")
-    
-    # check '~/.ipnotify' exists
-    check_dir(os.path.expanduser("~/.ipnotify"))
     
     # load config file
     conf = configuration.Configuration()
@@ -89,7 +63,7 @@ if __name__ == '__main__':
     lin = libipnotify.LibIpnotify()
     
     # access db
-    lin.start_db(os.path.expanduser(conf.get_param("db", "file")))
+    lin.start_db()
     
     last_ip = lin.last_ip()[2]
     
@@ -116,3 +90,6 @@ if __name__ == '__main__':
     
     sys.exit(0)
     
+
+if __name__ == '__main__':
+    main()

@@ -15,18 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
-Created on 23 Jul 2013
-
-@author: simone
-'''
-
 # from BeautifulSoup import BeautifulSoup  # @UnusedImport
 from urllib import urlopen
 import logging
 import os.path
 import sqlite3
 import smtplib
+
+from globals import *  # @UnusedWildImport
 
 
 class LibIpnotify(object):
@@ -101,8 +97,9 @@ Subject: %s
         logging.debug("store ip - %s" % sql)
         self.query(sql)
         
-    def start_db(self, dbfilename):
+    def start_db(self):
         '''access db, create a new db if it is missing'''
+        dbfilename = os.path.expanduser(SQLITE_DB)
         if not os.path.isfile(dbfilename):
             logging.info("db file '%s' is missing, creating it" % dbfilename)
             self.__con = sqlite3.connect(dbfilename)  # @UndefinedVariable
