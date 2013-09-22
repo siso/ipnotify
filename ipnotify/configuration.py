@@ -19,17 +19,14 @@ import logging
 import os
 
 import ConfigParser
-
+from globals import *  # @UnusedWildImport
 
 class Configuration:
     """read and and parse config file"""
     
     def __init__(self):
         '''determine config file path, load and parse it'''
-        config_file_locations = ['/opt/ipnotify/etc/ipnotify.conf',
-                                 './conf/ipnotify.conf',
-                                 os.path.expanduser('~/.ipnotify/ipnotify.conf')
-                                 ]
+        config_file_locations=[os.path.expanduser(CONFIG_FILE)]
         self.__config_file = None
         for f in config_file_locations:
             if os.path.exists(f):
