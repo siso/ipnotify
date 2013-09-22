@@ -39,7 +39,7 @@ def start_logging():
         logging.warn(('log configuration file missing. Default locations: %s' %
                       ", ".join(["%s" % f for f in log_config_file_locations])))
     
-if __name__ == '__main__':
+def main():
     # check environment before running
     check_env()
     
@@ -90,3 +90,6 @@ if __name__ == '__main__':
     
     sys.exit(0)
     
+
+if __name__ == '__main__':
+    main()
