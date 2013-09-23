@@ -21,7 +21,7 @@ from utility import *  # @UnusedWildImport
 
 import logging.config
 
-def start_logging():
+XXXXdef start_logging():
     '''
     Start logging facility
     '''
