@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/siso/ipnotify.png)](https://api.travis-ci.org/siso/ipnotify.png)
+
 # Ipnotify
 
 *ipnotify* queries external services, gets public IP address, and sends notification if it is changed since last execution.
