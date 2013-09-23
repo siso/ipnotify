@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.org/siso/ipnotify.png)](https://api.travis-ci.org/siso/ipnotify.png)
+[![ Build Status](https://api.travis-ci.org/siso/ipnotify.png)](https://api.travis-ci.org/siso/ipnotify.png)
 
 # Ipnotify
 
